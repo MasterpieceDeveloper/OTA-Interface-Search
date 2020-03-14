@@ -9,6 +9,12 @@
         <Projects Include="OTAIntfSearch.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\..\mstide.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\DGH-IDE-Notifiers\DGHIDENotifiers.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +41,32 @@
     <Target Name="OTAIntfSearch:Make">
         <MSBuild Projects="OTAIntfSearch.dproj" Targets="Make"/>
     </Target>
+    <Target Name="mstide">
+        <MSBuild Projects="..\..\mstide.dproj"/>
+    </Target>
+    <Target Name="mstide:Clean">
+        <MSBuild Projects="..\..\mstide.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="mstide:Make">
+        <MSBuild Projects="..\..\mstide.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DGHIDENotifiers">
+        <MSBuild Projects="..\DGH-IDE-Notifiers\DGHIDENotifiers.dproj"/>
+    </Target>
+    <Target Name="DGHIDENotifiers:Clean">
+        <MSBuild Projects="..\DGH-IDE-Notifiers\DGHIDENotifiers.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DGHIDENotifiers:Make">
+        <MSBuild Projects="..\DGH-IDE-Notifiers\DGHIDENotifiers.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="OTAIntfSearchTests;OTAIntfSearch"/>
+        <CallTarget Targets="OTAIntfSearchTests;OTAIntfSearch;mstide;DGHIDENotifiers"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="OTAIntfSearchTests:Clean;OTAIntfSearch:Clean"/>
+        <CallTarget Targets="OTAIntfSearchTests:Clean;OTAIntfSearch:Clean;mstide:Clean;DGHIDENotifiers:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="OTAIntfSearchTests:Make;OTAIntfSearch:Make"/>
+        <CallTarget Targets="OTAIntfSearchTests:Make;OTAIntfSearch:Make;mstide:Make;DGHIDENotifiers:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
